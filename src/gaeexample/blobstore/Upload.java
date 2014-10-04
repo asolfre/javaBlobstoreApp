@@ -27,22 +27,26 @@ public class Upload extends HttpServlet {
 
 		log.setLevel(Level.INFO);
 
-		log.info("contextpath:"+req.getContextPath());
-		System.out.println("contextpath:"+req.getContextPath());
-		log.info("getmethod:"+req.getMethod());
-		System.out.println("getmethod:"+req.getMethod());
-		log.info("getpathInfo:"+req.getPathInfo());
-		System.out.println("getpathInfo:"+req.getPathInfo());
-		log.info("getPathTranslated:"+req.getPathTranslated());
-		System.out.println("getPathTranslated:"+req.getPathTranslated());
-		log.info("queryString:"+req.getQueryString());
-		System.out.println("queryString:"+req.getQueryString());
+		log.info("contextpath: "+req.getContextPath());
+		System.out.println("contextpath: "+req.getContextPath());
+		log.info("getmethod: "+req.getMethod());
+		System.out.println("getmethod: "+req.getMethod());
+		log.info("getpathInfo: "+req.getPathInfo());
+		System.out.println("getpathInfo: "+req.getPathInfo());
+		log.info("getPathTranslated: "+req.getPathTranslated());
+		System.out.println("getPathTranslated: "+req.getPathTranslated());
+		log.info("queryString: "+req.getQueryString());
+		System.out.println("queryString: "+req.getQueryString());
 		log.info("reqURIpath:"+req.getRequestURI());
-		System.out.println("reqURIpath:"+req.getRequestURI());
+		System.out.println("reqURIpath: "+req.getRequestURI());
 		log.info("reqURLpath:"+req.getRequestURL());
-		System.out.println("reqURLpath:"+req.getRequestURL());
+		System.out.println("reqURLpath: "+req.getRequestURL());
 		log.info("servletpath:"+req.getServletPath());
-		System.out.println("servletpath:"+req.getServletPath());
+		System.out.println("servletpath: "+req.getServletPath());
+		
+		String parameter = req.getParameter("foo");
+		log.info("parameter[foo]: "+parameter);
+		System.out.println("parameter[foo]: "+parameter);
 
 
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
@@ -58,7 +62,9 @@ public class Upload extends HttpServlet {
             System.out.println("blobkey is null");
         }
         else {
-            bc.add(blobKeys.get(0));
+        	for(BlobKey blobkey:blobKeys){
+        		bc.add(blobkey);
+        	}
             res.sendRedirect("/serve.jsp?blob-key=" + blobKeys.get(0).getKeyString() + "&fromUpdate=1");
         }
     }
