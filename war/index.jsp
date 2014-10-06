@@ -23,7 +23,7 @@
     	<p>to re-submit a file, please hit "refresh" button</p>
         <form action="<%= blobstoreService.createUploadUrl("/upload") %>" method="post" enctype="multipart/form-data" id="form1">
             <input type="text" name="foo">
-            <input type="file" multiple="true" name="files">
+            <input type="file" multiple="multiple" name="files">
             <input type="text" name="description">
             <input id="button" type="button" onclick="upload()" value="Submit">
         </form>
